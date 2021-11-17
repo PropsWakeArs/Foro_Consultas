@@ -1,0 +1,143 @@
+<h1 class="display-5">Registrar Usuario</h1>
+
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="authForm"
+  class="row g-3 mt-4 needs-validation"
+  novalidate
+>
+  <div class="col-md-12">
+    <label for="validationCustom01" class="form-label">Numero de boleta</label>
+    <input
+      formControlName="idBoleta"
+      [ngClass]="
+        authForm.get('idBoleta').errors?.requiredField ? 'is-invalid' : ''
+      "
+      type="text"
+      class="form-control"
+      id="validationCustom01"
+      required
+    />
+    <div class="invalid-feedback">Por favor ingrese la boleta.</div>
+  </div>
+  <div class="col-md-12">
+    <label for="validationCustom02" class="form-label">Correo</label>
+    <input
+      formControlName="email"
+      [ngClass]="
+        authForm.get('email').errors?.requiredField ? 'is-invalid' : ''
+      "
+      type="text"
+      class="form-control"
+      id="validationCustom02"
+      required
+    />
+    <div class="invalid-feedback">Por favor ingrese el correo.</div>
+  </div>
+  <div class="col-md-12">
+    <label for="validationCustom03" class="form-label">Primer Nombre</label>
+    <input
+      formControlName="pNombre"
+      [ngClass]="
+        authForm.get('pNombre').errors?.requiredField ? 'is-invalid' : ''
+      "
+      type="text"
+      class="form-control"
+      id="validationCustom03"
+      required
+    />
+
+    <div class="invalid-feedback">Por favor ingrese el primer nombre.</div>
+  </div>
+  <div class="col-md-12">
+    <label for="validationCustom04" class="form-label"
+      >Segundo Nombre (Opcional)</label
+    >
+    <input
+      formControlName="sNombre"
+      type="text"
+      class="form-control"
+      id="validationCustom04"
+    />
+  </div>
+  <div class="col-md-12">
+    <label for="validationCustom05" class="form-label">Primer Apellido</label>
+    <input
+      formControlName="pApellido"
+      [ngClass]="
+        authForm.get('pApellido').errors?.requiredField ? 'is-invalid' : ''
+      "
+      type="text"
+      class="form-control"
+      id="validationCustom05"
+    />
+    <div class="invalid-feedback">Por favor ingrese el primer apellido.</div>
+  </div>
+  <div class="col-md-12">
+    <label for="validationCustom06" class="form-label"
+      >Segundo Apellido (Opcional)</label
+    >
+    <input
+      formControlName="sApellido"
+      type="text"
+      class="form-control"
+      id="validationCustom06"
+    />
+  </div>
+  <div class="col-md-12">
+    <label for="validationCustom06" class="form-label">Carrera</label>
+    <select
+      formControlName="carrera"
+      class="form-select"
+      aria-label="Default select example"
+    >
+      <option selected value="1">Administración</option>
+      <option value="2">CInformatica</option>
+      <option value="3">IInformática</option>
+      <option value="4">Industrial</option>
+      <option value="5">Transporte</option>
+      <option value="6">ControlE</option>
+    </select>
+    <div class="invalid-feedback">Por favor ingrese la carrera.</div>
+  </div>
+  <div class="col-md-12">
+    <label for="validationCustom07" class="form-label">Contraseña</label>
+    <input
+      formControlName="passUser"
+      [ngClass]="
+        authForm.get('passUser').errors?.requiredField ? 'is-invalid' : ''
+      "
+      type="password"
+      class="form-control"
+      id="validationCustom07"
+    />
+    <div class="invalid-feedback">Por favor ingrese la contraseña.</div>
+  </div>
+
+  <div class="col-md-12">
+    <label for="validationCustom08" class="form-label"
+      >Repetir contraseña</label
+    >
+    <input
+      formControlName="passUserRepeat"
+      [ngClass]="
+        authForm.get('passUserRepeat').errors?.requiredField ? 'is-invalid' : ''
+      "
+      type="password"
+      class="form-control"
+      id="validationCustom08"
+    />
+
+    <div class="invalid-feedback">Por favor ingrese la contraseña.</div>
+  </div>
+  <div class="mt-5 row">
+    <div class="col-6 ms-auto">
+      <a href="administrador/usuarios" class="btn btn-outline-danger">Cancelar</a>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-outline-primary me-auto" type="submit">
+        Registrar
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,45 @@
+<h1 class="display-5">Realizar un comentario para el foro</h1>
+
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="authForm"
+  class="row g-3 mt-4 needs-validation"
+  novalidate
+>
+  <div class="col-md-12">
+    <label for="validationCustom06" class="form-label">Tema</label>
+    <select
+      formControlName="temaComentario"
+      class="form-select"
+      aria-label="Default select example"
+    >
+      <option selected value="1">Tŕamite escolar</option>
+      <option value="2">Dictamen</option>
+      <option value="3">Bajas</option>
+    </select>
+    <div class="invalid-feedback">Por favor ingrese el tema.</div>
+  </div>
+  <div class="col-md-12">
+    <label for="validationCustom07" class="form-label">Comentario</label>
+    <textarea
+      formControlName="comentario"
+      [ngClass]="
+        authForm.get('comentario').errors?.requiredField ? 'is-invalid' : ''
+      "
+      type="text"
+      class="form-control"
+      id="validationCustom07"
+      row="3"></textarea>
+    <div class="invalid-feedback">Por favor ingrese el comentario.</div>
+  </div>
+  <div class="mt-5 row">
+    <div class="col-6 ms-auto">
+      <a href="administrador/anuncios" class="btn btn-outline-danger">Cancelar</a>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-outline-primary me-auto" type="submit">
+        Comentar
+      </button>
+    </div>
+  </div>
+</form>

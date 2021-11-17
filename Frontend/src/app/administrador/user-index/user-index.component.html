@@ -1,0 +1,74 @@
+<h1 class="display-5">Usuarios registrados</h1>
+
+<div class="mt-4">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Boleta</th>
+          <th scope="col">Primer Nombre</th>
+          <th scope="col">Segundo Nombre</th>
+          <th scope="col">Primer Apellido</th>
+          <th scope="col">Segundo Apellido</th>
+          <th scope="col">Correo</th>
+          <th scope="col">Carrera</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let alumno of alumnos">
+          <td>{{ alumno.idBoleta }}</td>
+          <td>{{ alumno.pNombre }}</td>
+          <td>{{ alumno.sNombre }}</td>
+          <td>{{ alumno.pApellido }}</td>
+          <td>{{ alumno.sApellido }}</td>
+          <td>{{ alumno.email }}</td>
+          <td>
+            {{
+              alumno.carrera === "1"
+                ? "Administración"
+                : alumno.carrera === "2"
+                ? "CInformática"
+                : alumno.carrera === "3"
+                ? "IInformatica"
+                : alumno.carrera === "4"
+                ? "Industrial"
+                : alumno.carrera === "5"
+                ? "Transporte"
+                : "ControlE"
+            }}
+          </td>
+          <td>
+            <a
+              href="administrador/editar_usuario/{{ alumno?.idBoleta }}"
+              type="button"
+              class="btn btn-sm btn-outline-secondary me-1"
+            >
+              <i class="fa fa-pen"></i>
+            </a>
+            <button
+              (click)="eliminarUsuario(alumno?.idBoleta)"
+              type="button"
+              class="btn btn-sm btn-outline-danger"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<blockquote>
+  <div></div>
+  <div class="mt-3" style="text-align: right">
+    <a
+      href="/administrador/registrar_usuario"
+      type="button"
+      class="btn btn-outline-primary mb-2"
+    >
+      Registrar
+    </a>
+  </div>
+</blockquote>
