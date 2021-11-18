@@ -15,6 +15,7 @@ export class CrearComponent implements OnInit {
     ]),
     email: new FormControl('', [
       Validators.required,
+      Validators.email
     ]),
     pNombre: new FormControl('', [
       Validators.required,
@@ -47,8 +48,10 @@ export class CrearComponent implements OnInit {
     if (this.authForm.invalid) {
       if (this.authForm.get('idBoleta').value === '')
         this.authForm.get('idBoleta').setErrors({ requiredField: true })
-      if (this.authForm.get('email').value === '')
-        this.authForm.get('email').setErrors({ requiredField: true })
+      if (this.authForm.get('email').hasError('required'))
+        this.authForm.get('email').setErrors({ msg: 'Por favor ingrese el correo.' })
+      if (this.authForm.get('email').hasError('email'))
+        this.authForm.get('email').setErrors({ msg: 'Por favor ingrese un correo valido.' })
       if (this.authForm.get('pNombre').value === '')
         this.authForm.get('pNombre').setErrors({ requiredField: true })
       if (this.authForm.get('pApellido').value === '')
