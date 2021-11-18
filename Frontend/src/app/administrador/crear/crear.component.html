@@ -69,13 +69,13 @@
     <input
       formControlName="pApellido"
       [ngClass]="
-        authForm.get('pApellido').errors?.requiredField ? 'is-invalid' : ''
+        authForm.get('pApellido').errors?.msg ? 'is-invalid' : ''
       "
       type="text"
       class="form-control"
       id="validationCustom05"
     />
-    <div class="invalid-feedback">Por favor ingrese el primer apellido.</div>
+    <div class="invalid-feedback">{{ authForm.get('pApellido').errors?.msg }}</div>
   </div>
   <div class="col-md-12">
     <label for="validationCustom06" class="form-label"
