@@ -83,10 +83,14 @@
     >
     <input
       formControlName="sApellido"
+      [ngClass]="
+        authForm.get('sApellido').errors?.msg ? 'is-invalid' : ''
+      "
       type="text"
       class="form-control"
       id="validationCustom06"
     />
+    <div class="invalid-feedback">{{ authForm.get('sApellido').errors?.msg }}</div>
   </div>
   <div class="col-md-12">
     <label for="validationCustom06" class="form-label">Carrera*</label>
