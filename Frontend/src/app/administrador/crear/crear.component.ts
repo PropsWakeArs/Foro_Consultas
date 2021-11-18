@@ -19,6 +19,7 @@ export class CrearComponent implements OnInit {
     ]),
     pNombre: new FormControl('', [
       Validators.required,
+      Validators.pattern("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*")
     ]),
     sNombre: new FormControl(''),
     pApellido: new FormControl('', [
@@ -52,8 +53,10 @@ export class CrearComponent implements OnInit {
         this.authForm.get('email').setErrors({ msg: 'Por favor ingrese el correo.' })
       if (this.authForm.get('email').hasError('email'))
         this.authForm.get('email').setErrors({ msg: 'Por favor ingrese un correo valido.' })
-      if (this.authForm.get('pNombre').value === '')
-        this.authForm.get('pNombre').setErrors({ requiredField: true })
+      if (this.authForm.get('pNombre').hasError('required'))
+        this.authForm.get('pNombre').setErrors({ msg: 'Por favor ingrese el primer nombre.' })
+      if (this.authForm.get('pNombre').hasError('pattern'))
+        this.authForm.get('pNombre').setErrors({ msg: 'Por favor ingrese un nombre valido.' })
       if (this.authForm.get('pApellido').value === '')
         this.authForm.get('pApellido').setErrors({ requiredField: true })
       if (this.authForm.get('carrera').value === '')

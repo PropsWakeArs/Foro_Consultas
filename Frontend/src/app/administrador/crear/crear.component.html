@@ -39,7 +39,7 @@
     <input
       formControlName="pNombre"
       [ngClass]="
-        authForm.get('pNombre').errors?.requiredField ? 'is-invalid' : ''
+        authForm.get('pNombre').errors?.msg ? 'is-invalid' : ''
       "
       type="text"
       class="form-control"
@@ -47,7 +47,7 @@
       required
     />
 
-    <div class="invalid-feedback">Por favor ingrese el primer nombre.</div>
+    <div class="invalid-feedback">{{ authForm.get('pNombre').errors?.msg }}</div>
   </div>
   <div class="col-md-12">
     <label for="validationCustom04" class="form-label"
