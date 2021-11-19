@@ -7,7 +7,7 @@
   novalidate
 >
   <div class="col-md-12">
-    <label for="validationCustom01" class="form-label">Numero de boleta</label>
+    <label for="validationCustom01" class="form-label">Numero de boleta*</label>
     <input
       formControlName="idBoleta"
       [ngClass]="
@@ -21,25 +21,25 @@
     <div class="invalid-feedback">Por favor ingrese la boleta.</div>
   </div>
   <div class="col-md-12">
-    <label for="validationCustom02" class="form-label">Correo</label>
+    <label for="validationCustom02" class="form-label">Correo*</label>
     <input
       formControlName="email"
       [ngClass]="
-        authForm.get('email').errors?.requiredField ? 'is-invalid' : ''
+        authForm.get('email').errors?.msg ? 'is-invalid' : ''
       "
-      type="text"
+      type="email"
       class="form-control"
       id="validationCustom02"
       required
     />
-    <div class="invalid-feedback">Por favor ingrese el correo.</div>
+    <div class="invalid-feedback">{{ authForm.get('email').errors?.msg }}</div>
   </div>
   <div class="col-md-12">
-    <label for="validationCustom03" class="form-label">Primer Nombre</label>
+    <label for="validationCustom03" class="form-label">Primer Nombre*</label>
     <input
       formControlName="pNombre"
       [ngClass]="
-        authForm.get('pNombre').errors?.requiredField ? 'is-invalid' : ''
+        authForm.get('pNombre').errors?.msg ? 'is-invalid' : ''
       "
       type="text"
       class="form-control"
@@ -47,7 +47,7 @@
       required
     />
 
-    <div class="invalid-feedback">Por favor ingrese el primer nombre.</div>
+    <div class="invalid-feedback">{{ authForm.get('pNombre').errors?.msg }}</div>
   </div>
   <div class="col-md-12">
     <label for="validationCustom04" class="form-label"
@@ -55,23 +55,27 @@
     >
     <input
       formControlName="sNombre"
+      [ngClass]="
+        authForm.get('sNombre').errors?.msg ? 'is-invalid' : ''
+      "
       type="text"
       class="form-control"
       id="validationCustom04"
     />
+    <div class="invalid-feedback">{{ authForm.get('sNombre').errors?.msg }}</div>
   </div>
   <div class="col-md-12">
-    <label for="validationCustom05" class="form-label">Primer Apellido</label>
+    <label for="validationCustom05" class="form-label">Primer Apellido*</label>
     <input
       formControlName="pApellido"
       [ngClass]="
-        authForm.get('pApellido').errors?.requiredField ? 'is-invalid' : ''
+        authForm.get('pApellido').errors?.msg ? 'is-invalid' : ''
       "
       type="text"
       class="form-control"
       id="validationCustom05"
     />
-    <div class="invalid-feedback">Por favor ingrese el primer apellido.</div>
+    <div class="invalid-feedback">{{ authForm.get('pApellido').errors?.msg }}</div>
   </div>
   <div class="col-md-12">
     <label for="validationCustom06" class="form-label"
@@ -79,14 +83,21 @@
     >
     <input
       formControlName="sApellido"
+      [ngClass]="
+        authForm.get('sApellido').errors?.msg ? 'is-invalid' : ''
+      "
       type="text"
       class="form-control"
       id="validationCustom06"
     />
+    <div class="invalid-feedback">{{ authForm.get('sApellido').errors?.msg }}</div>
   </div>
   <div class="col-md-12">
-    <label for="validationCustom06" class="form-label">Carrera</label>
+    <label for="validationCustom06" class="form-label">Carrera*</label>
     <select
+     [ngClass]="
+        authForm.get('carrera').errors?.requiredField ? 'is-invalid' : ''
+      "
       formControlName="carrera"
       class="form-select"
       aria-label="Default select example"
@@ -101,7 +112,7 @@
     <div class="invalid-feedback">Por favor ingrese la carrera.</div>
   </div>
   <div class="col-md-12">
-    <label for="validationCustom07" class="form-label">Contraseña</label>
+    <label for="validationCustom07" class="form-label">Contraseña*</label>
     <input
       formControlName="passUser"
       [ngClass]="
@@ -116,7 +127,7 @@
 
   <div class="col-md-12">
     <label for="validationCustom08" class="form-label"
-      >Repetir contraseña</label
+      >Repetir contraseña*</label
     >
     <input
       formControlName="passUserRepeat"
