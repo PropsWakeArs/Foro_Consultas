@@ -29,6 +29,8 @@ export class ComentarComponent implements OnInit {
     if (this.authForm.invalid) {
       if (this.authForm.get('comentario').value === '')
         this.authForm.get('comentario').setErrors({ requiredField: true })
+      if (this.authForm.get('temaComentario').value === '')
+        this.authForm.get('temaComentario').setErrors({ requiredField: true })
       return;
     }
 
