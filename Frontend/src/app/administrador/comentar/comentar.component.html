@@ -10,6 +10,9 @@
     <label for="validationCustom06" class="form-label">Tema</label>
     <select
       formControlName="temaComentario"
+      [ngClass]="
+        authForm.get('temaComentario').errors?.requiredField ? 'is-invalid' : ''
+      "
       class="form-select"
       aria-label="Default select example"
     >
@@ -24,13 +27,13 @@
     <textarea
       formControlName="comentario"
       [ngClass]="
-        authForm.get('comentario').errors?.requiredField ? 'is-invalid' : ''
+        authForm.get('comentario').errors?.msg ? 'is-invalid' : ''
       "
       type="text"
       class="form-control"
       id="validationCustom07"
       row="3"></textarea>
-    <div class="invalid-feedback">Por favor ingrese el comentario.</div>
+    <div class="invalid-feedback">{{ authForm.get('comentario').errors?.msg }}</div>
   </div>
   <div class="mt-5 row">
     <div class="col-6 ms-auto">

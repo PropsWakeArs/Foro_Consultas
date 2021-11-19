@@ -15,6 +15,7 @@ export class ComentarComponent implements OnInit {
     ]),
     comentario: new FormControl('', [
       Validators.required,
+      Validators.maxLength(200)
     ]),
   });
 
@@ -27,8 +28,12 @@ export class ComentarComponent implements OnInit {
 
   onSubmit(): void {
     if (this.authForm.invalid) {
-      if (this.authForm.get('comentario').value === '')
-        this.authForm.get('comentario').setErrors({ requiredField: true })
+      if (this.authForm.get('comentario').hasError('required'))
+        this.authForm.get('comentario').setErrors({ msg: 'Por favor ingrese el comentario.' })
+      if (this.authForm.get('comentario').hasError('maxlength'))
+        this.authForm.get('comentario').setErrors({ msg: 'La longitud debe ser menor a 200 caracteres' })
+      if (this.authForm.get('temaComentario').value === '')
+        this.authForm.get('temaComentario').setErrors({ requiredField: true })
       return;
     }
 
