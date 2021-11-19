@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { User } from '../core/models/user';
 
 const ROOT_URL = 'http://localhost:3000/api/v1/auth';
 
@@ -12,7 +13,7 @@ interface Credentials {
 
 interface SigninResponse {
   message: string;
-  usuario: any;
+  usuario: User;
 }
 
 interface CheckAuthResponse {
@@ -22,7 +23,7 @@ interface CheckAuthResponse {
 
 interface AuthData {
   isAuthenticated: boolean,
-  usuario: any,
+  usuario: User,
 }
 
 @Injectable({
@@ -30,7 +31,7 @@ interface AuthData {
 })
 export class AuthService {
   
-  signedin$ = new BehaviorSubject<AuthData>(null);
+  signedin$ = new BehaviorSubject<AuthData>({isAuthenticated: null, usuario: null});
 
   constructor(private http: HttpClient) { }
 

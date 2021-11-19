@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth/auth.guard';
 import { SigninComponent } from './auth/signin/signin.component';
+import { Rol } from './core/models/rol.enum';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -9,7 +10,26 @@ const routes: Routes = [
     path: 'administrador',
     loadChildren: () => import('./administrador/administrador.module')
       .then(mod => mod.AdministradorModule),
+    data: {
+      rol: Rol.ADMINISTRADOR
+    }
   },
+  {
+    canLoad: [AuthGuard],
+    path: 'estudiante',
+    loadChildren: () => import('./modules/estudiantes/estudiantes.module')
+      .then(mod => mod.EstudiantesModule),
+      data: {
+        rol: Rol.ESTUDIANTE
+      }
+  },
+  
+  {
+    canActivate: [AuthGuard],
+    path: '',
+    component: SigninComponent
+  }
+
   // {
   //   canLoad: [AuthGuard],
   //   path: 'employees',

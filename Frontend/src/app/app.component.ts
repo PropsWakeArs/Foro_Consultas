@@ -21,6 +21,8 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.authService.checkAuth().subscribe(()=>{});
+    this.authService.checkAuth().subscribe({next: ()=>{},
+    error: (err) => this.signedIn$.next({isAuthenticated: false, usuario: null})
+  });
   }
 }

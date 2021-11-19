@@ -25,3 +25,4 @@ import { ComentarComponent } from './comentar/comentar.component';
   ]
 })
 export class AdministradorModule { }
+

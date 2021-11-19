@@ -6,4 +6,5 @@ export interface User {
     pApellido: string,
     sApellido: string,
     carrera: string,
+    confUser: number,
 }
