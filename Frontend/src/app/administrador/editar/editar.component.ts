@@ -15,18 +15,27 @@ export class EditarComponent implements OnInit {
   authForm = new FormGroup({
     idBoleta: new FormControl('', [
       Validators.required,
+      Validators.pattern("[0-9]*"),
     ]),
     email: new FormControl('', [
       Validators.required,
+      Validators.email,
     ]),
     pNombre: new FormControl('', [
       Validators.required,
+      Validators.pattern("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*"),
     ]),
-    sNombre: new FormControl(''),
+    sNombre: new FormControl('',[
+      Validators.pattern("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*"),
+    ]),
     pApellido: new FormControl('', [
       Validators.required,
+      Validators.pattern("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*"),
+
     ]),
-    sApellido: new FormControl(''),
+    sApellido: new FormControl('',[
+      Validators.pattern("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*"),
+    ]),
     carrera: new FormControl('', [
       Validators.required,
     ]),
@@ -67,18 +76,36 @@ export class EditarComponent implements OnInit {
     if (this.authForm.invalid) {
       if (this.authForm.get('idBoleta').value === '')
         this.authForm.get('idBoleta').setErrors({ requiredField: true })
-      if (this.authForm.get('email').value === '')
-        this.authForm.get('email').setErrors({ requiredField: true })
-      if (this.authForm.get('pNombre').value === '')
-        this.authForm.get('pNombre').setErrors({ requiredField: true })
-      if (this.authForm.get('pApellido').value === '')
-        this.authForm.get('pApellido').setErrors({ requiredField: true })
+      if(this.authForm.get('idBoleta').hasError('pattern'))
+        this.authForm.get('idBoleta').setErrors({msg:'Caracteres no validos'})
+      if (this.authForm.get('email').hasError('required'))
+        this.authForm.get('email').setErrors({ msg: 'Por favor ingrese el correo.' })
+      if (this.authForm.get('email').hasError('email'))
+        this.authForm.get('email').setErrors({ msg: 'Por favor ingrese un correo valido.' })
+        if (this.authForm.get('pNombre').hasError('required'))
+        this.authForm.get('pNombre').setErrors({ msg: 'Por favor ingrese el primer nombre.' })
+      if (this.authForm.get('pNombre').hasError('pattern'))
+        this.authForm.get('pNombre').setErrors({ msg: 'Por favor ingrese un nombre valido.' })
+      if (this.authForm.get('sNombre').hasError('pattern'))
+        this.authForm.get('sNombre').setErrors({ msg: 'Por favor ingrese un nombre valido.' })
+      if (this.authForm.get('pApellido').hasError('required'))
+        this.authForm.get('pApellido').setErrors({ msg: 'Por favor ingrese el primer apellido.' })
+      if (this.authForm.get('pApellido').hasError('pattern'))
+        this.authForm.get('pApellido').setErrors({ msg: 'Por favor ingrese un apellido valido.' })
+      if (this.authForm.get('sApellido').hasError('pattern'))
+        this.authForm.get('sApellido').setErrors({ msg: 'Por favor ingrese un apellido valido.' })
       if (this.authForm.get('carrera').value === '')
         this.authForm.get('carrera').setErrors({ requiredField: true })
       if (this.authForm.get('passUser').value === '')
         this.authForm.get('passUser').setErrors({ requiredField: true })
       if (this.authForm.get('passUserRepeat').value === '')
         this.authForm.get('passUserRepeat').setErrors({ requiredField: true })
+      return;
+    }
+
+    if (this.authForm.get('passUser').value !==  this.authForm.get('passUserRepeat').value) {
+      this.authForm.get('passUser').setErrors({notMatch: true})
+      this.authForm.get('passUserRepeat').setErrors({ notMatch: true })
       return;
     }
 
