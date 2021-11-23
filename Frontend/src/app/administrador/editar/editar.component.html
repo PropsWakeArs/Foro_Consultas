@@ -7,125 +7,159 @@
   novalidate
 >
   <div class="col-md-12">
-    <label for="validationCustom01" class="form-label">Numero de boleta</label>
+    <label for="validationCustom01" class="form-label">Número de boleta*</label>
     <input
       formControlName="idBoleta"
       [ngClass]="
-        authForm.get('idBoleta').errors?.requiredField ? 'is-invalid' : ''
+        authForm.get('idBoleta').errors?.requiredField ? 'is-invalid' : '' ||
+        authForm.get('idBoleta').errors?.msg ? 'is-invalid' : ''
       "
       type="text"
       class="form-control"
       id="validationCustom01"
       required
+      maxlength="10"
     />
     <div class="invalid-feedback">Por favor ingrese la boleta.</div>
+    <div class="invalid-feedback">{{ authForm.get('idBoleta').errors?.msg }}</div>
   </div>
+
   <div class="col-md-12">
-    <label for="validationCustom02" class="form-label">Correo</label>
+    <label for="validationCustom02" class="form-label">Correo*</label>
     <input
       formControlName="email"
       [ngClass]="
-        authForm.get('email').errors?.requiredField ? 'is-invalid' : ''
+        authForm.get('email').errors?.msg ? 'is-invalid' : ''
       "
       type="text"
       class="form-control"
       id="validationCustom02"
       required
+      maxlength="45"
     />
-    <div class="invalid-feedback">Por favor ingrese el correo.</div>
+    <div class="invalid-feedback">{{ authForm.get('email').errors?.msg }}</div>
   </div>
+
   <div class="col-md-12">
-    <label for="validationCustom03" class="form-label">Primer Nombre</label>
+    <label for="validationCustom03" class="form-label">Primer Nombre*</label>
     <input
       formControlName="pNombre"
       [ngClass]="
-        authForm.get('pNombre').errors?.requiredField ? 'is-invalid' : ''
+        authForm.get('pNombre').errors?.msg ? 'is-invalid' : ''
       "
       type="text"
       class="form-control"
       id="validationCustom03"
       required
+      maxlength="45"
     />
-
-    <div class="invalid-feedback">Por favor ingrese el primer nombre.</div>
+    <div class="invalid-feedback">{{ authForm.get('pNombre').errors?.msg }}</div>
   </div>
+
   <div class="col-md-12">
     <label for="validationCustom04" class="form-label"
       >Segundo Nombre (Opcional)</label
     >
     <input
       formControlName="sNombre"
+      [ngClass]="
+        authForm.get('sNombre').errors?.msg ? 'is-invalid' : ''
+      "
       type="text"
       class="form-control"
       id="validationCustom04"
+      maxlength="45"
     />
+    <div class="invalid-feedback">{{ authForm.get('sNombre').errors?.msg }}</div>
   </div>
+
   <div class="col-md-12">
-    <label for="validationCustom05" class="form-label">Primer Apellido</label>
+    <label for="validationCustom05" class="form-label">Primer Apellido*</label>
     <input
       formControlName="pApellido"
       [ngClass]="
-        authForm.get('pApellido').errors?.requiredField ? 'is-invalid' : ''
+        authForm.get('pApellido').errors?.msg ? 'is-invalid' : ''
       "
       type="text"
       class="form-control"
       id="validationCustom05"
+      maxlength="45"
     />
-    <div class="invalid-feedback">Por favor ingrese el primer apellido.</div>
+    <div class="invalid-feedback">{{ authForm.get('pApellido').errors?.msg }}</div>
   </div>
+
   <div class="col-md-12">
     <label for="validationCustom06" class="form-label"
       >Segundo Apellido (Opcional)</label
     >
     <input 
-    formControlName="sApellido" type="text" class="form-control" id="validationCustom06" />
+    formControlName="sApellido" 
+    [ngClass]="
+        authForm.get('sApellido').errors?.msg ? 'is-invalid' : ''
+      "
+    type="text" 
+    class="form-control" 
+    id="validationCustom06" 
+    maxlength="45"/>
+    <div class="invalid-feedback">{{ authForm.get('sApellido').errors?.msg }}</div>
   </div>
+
   <div class="col-md-12">
-    <label for="validationCustom06" class="form-label">Carrera</label>
+    <label for="validationCustom06" class="form-label">Carrera*</label>
     <select
+      [ngClass]="
+        authForm.get('carrera').errors?.requiredField ? 'is-invalid' : ''
+      "
       formControlName="carrera"
       class="form-select"
       aria-label="Default select example"
     >
       <option selected value="1">Administración</option>
-      <option value="2">CInformatica</option>
-      <option value="3">IInformática</option>
-      <option value="4">Industrial</option>
-      <option value="5">Transporte</option>
-      <option value="6">ControlE</option>
+      <option value="2">Ciencias de la Informática</option>
+      <option value="3">Ingeniería en Informática</option>
+      <option value="4">Ingeniería Industrial</option>
+      <option value="5">Ingeniería en Transporte</option>
+      <option value="6">Control Escolar</option>
     </select>
     <div class="invalid-feedback">Por favor ingrese la carrera.</div>
   </div>
+
   <div class="col-md-12">
-    <label for="validationCustom07" class="form-label">Contraseña</label>
+    <label for="validationCustom07" class="form-label">Contraseña*</label>
     <input
       formControlName="passUser"
       [ngClass]="
-        authForm.get('passUser').errors?.requiredField ? 'is-invalid' : ''
+        authForm.get('passUser').errors?.requiredField  ||
+        authForm.get('passUser').errors?.notMatch ? 'is-invalid' : ''
       "
       type="password"
       class="form-control"
       id="validationCustom07"
+      maxlength="20"
     />
-    <div class="invalid-feedback">Por favor ingrese la nueva contraseña.</div>
+    <div *ngIf="authForm.get('passUser').errors?.requiredField" class="invalid-feedback">Por favor ingrese la contraseña.</div>
+    <div *ngIf="authForm.get('passUser').errors?.notMatch" class="invalid-feedback">Las contraseñas no coinciden.</div>
   </div>
 
   <div class="col-md-12">
     <label for="validationCustom08" class="form-label"
-      >Repetir contraseña</label
+      >Repetir contraseña*</label
     >
     <input
       formControlName="passUserRepeat"
       [ngClass]="
-        authForm.get('passUserRepeat').errors?.requiredField ? 'is-invalid' : ''
+        authForm.get('passUserRepeat').errors?.requiredField ||
+        authForm.get('passUserRepeat').errors?.notMatch  ? 'is-invalid' : ''
       "
       type="password"
       class="form-control"
       id="validationCustom08"
+      maxlength="20"
     />
-
-    <div class="invalid-feedback">Por favor ingrese la nueva contraseña.</div>
+    <div *ngIf="authForm.get('passUserRepeat').errors?.requiredField" class="invalid-feedback">Por favor ingrese la contraseña.</div>
+    <div *ngIf="authForm.get('passUserRepeat').errors?.notMatch" class="invalid-feedback">Las contraseñas no coinciden.</div>
   </div>
+  
   <div class="mt-5 row">
     <div class="col-6 ms-auto">
       <a href="administrador/usuarios" class="btn btn-outline-danger">Cancelar</a>

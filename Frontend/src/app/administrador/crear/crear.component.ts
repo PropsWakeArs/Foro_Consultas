@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, PatternValidator } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -12,24 +12,25 @@ export class CrearComponent implements OnInit {
   authForm = new FormGroup({
     idBoleta: new FormControl('', [
       Validators.required,
+      Validators.pattern("[0-9]*"),
     ]),
     email: new FormControl('', [
       Validators.required,
-      Validators.email
+      Validators.email,
     ]),
     pNombre: new FormControl('', [
       Validators.required,
-      Validators.pattern("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*")
+      Validators.pattern("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*"),
     ]),
     sNombre: new FormControl('', [
-      Validators.pattern("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*")
+      Validators.pattern("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*"),
     ]),
     pApellido: new FormControl('', [
       Validators.required,
-      Validators.pattern("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*")
+      Validators.pattern("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*"),
     ]),
     sApellido: new FormControl('', [
-      Validators.pattern("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*")
+      Validators.pattern("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*"),
     ]),
     carrera: new FormControl('', [
       Validators.required,
@@ -54,6 +55,8 @@ export class CrearComponent implements OnInit {
     if (this.authForm.invalid) {
       if (this.authForm.get('idBoleta').value === '')
         this.authForm.get('idBoleta').setErrors({ requiredField: true })
+      if(this.authForm.get('idBoleta').hasError('pattern'))
+        this.authForm.get('idBoleta').setErrors({msg:'Caracteres no validos'})
       if (this.authForm.get('email').hasError('required'))
         this.authForm.get('email').setErrors({ msg: 'Por favor ingrese el correo.' })
       if (this.authForm.get('email').hasError('email'))
@@ -76,6 +79,12 @@ export class CrearComponent implements OnInit {
         this.authForm.get('passUser').setErrors({ requiredField: true })
       if (this.authForm.get('passUserRepeat').value === '')
         this.authForm.get('passUserRepeat').setErrors({ requiredField: true })
+      return;
+    }
+
+    if (this.authForm.get('passUser').value !==  this.authForm.get('passUserRepeat').value) {
+      this.authForm.get('passUser').setErrors({notMatch: true})
+      this.authForm.get('passUserRepeat').setErrors({ notMatch: true })
       return;
     }
 

@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
+import { User } from 'src/app/core/models/user';
 import { ComentarioService } from 'src/app/core/services/comentario.service';
+
+interface AuthData {
+  isAuthenticated: boolean,
+  usuario: User,
+}
 
 @Component({
   selector: 'app-comentar',
@@ -19,9 +27,10 @@ export class ComentarComponent implements OnInit {
     ]),
   });
 
+  signedIn$: BehaviorSubject<AuthData>;
 
-
-  constructor(private comentarioService: ComentarioService, private router: Router) { }
+  constructor(private comentarioService: ComentarioService, private router: Router, private authService: AuthService) 
+  {this.signedIn$ = this.authService.signedin$; }
 
   ngOnInit(): void {
   }

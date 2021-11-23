@@ -32,13 +32,25 @@
       type="text"
       class="form-control"
       id="validationCustom07"
-      row="3"></textarea>
+      row="3"
+      maxlength ="200"
+      ></textarea>
     <div class="invalid-feedback">{{ authForm.get('comentario').errors?.msg }}</div>
   </div>
   <div class="mt-5 row">
     <div class="col-6 ms-auto">
-      <a href="administrador/anuncios" class="btn btn-outline-danger">Cancelar</a>
+      <a *ngIf="signedIn$.getValue()?.usuario.confUser === 1"
+          href="administrador/anuncios"
+          type="button"
+          class="btn btn-outline-danger">
+        Cancelar</a>
+          <a *ngIf="signedIn$.getValue()?.usuario.confUser === 0"
+          href="/estudiante/anuncios"
+              type="button"
+              class="btn btn-outline-danger">
+            Cancelar</a>
     </div>
+
     <div class="col-6">
       <button class="btn btn-outline-primary me-auto" type="submit">
         Comentar
